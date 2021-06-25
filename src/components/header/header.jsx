@@ -10,7 +10,7 @@ function Header() {
     <div className="header">
       <div className="header_nav_left">
         <div className="header_logo">
-          <a href="/home">
+          <a href="/r">
             <img src={reddit_logo} alt="" className="reddit_logo" />
             <img src={reddit_text} alt="" className="reddit_text" />
           </a>
