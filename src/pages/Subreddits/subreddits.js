@@ -13,23 +13,22 @@ function Subreddits() {
         })
             .then(res => {
                 setSubReddits(res.data)
-                console.log("res.data", res.data)
             })
             .catch(error => console.log(error))
     }, [])
     return (
         <div>
 
-            <ul>subreddits
+            <ul>subreddits from Subreddits
 
                 {subReddits.map(subreddit => {
-                    return <Link to={{ pathname: `/r/${subreddit.handle}/`, state: { id: subreddit.id } }}  ><li key={subreddit.id}>{subreddit.title}</li></Link>
+                    return <Link to={{ pathname: `/r/${subreddit.handle}/`, state: { id: subreddit.id, handle: subreddit.handle } }}><li key={subreddit.id}>{subreddit.title}</li></Link>
                 })
                 }
             </ul>
         </div>
     )
-}
+};
 
 export default Subreddits
 

@@ -2,19 +2,24 @@ import React from 'react'
 import './App.css';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
-import Home from './pages/home/home';
+import Header from './components/header/header'
+import Home from "./pages/home/home"
 import Feed from './components/feed/feed';
-import Post from './pages/post/post';
+import Posts from './pages/posts/posts';
+import SubredditPost from './components/subreddit-post/subreddit-post';
+
 
 function App() {
 
   return (
     <div className="App">
-      <Home />
+      <Header />
       <BrowserRouter>
         <Switch>
-          <Route exact path="/r/:id" component={Post} />
+          <Route exact path="/r/:handle/:subredditId/posts/:id" component={SubredditPost} />
+          <Route exact path="/r/:id" component={Posts} />
           <Route exact path="/r" component={Feed} />
+          <Route exact path="/" component={Home} />
         </Switch>
       </BrowserRouter>
     </div>

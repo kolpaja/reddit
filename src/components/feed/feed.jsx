@@ -1,5 +1,5 @@
 import React from "react";
-import Posts from "../../pages/Subreddits/subreddits";
+import Posts from "../../pages/subreddits/subreddits";
 
 function Feed() {
   return (
