@@ -1,10 +1,10 @@
 import React from "react";
-import Posts from "../../pages/subreddits/subreddits";
+import Subreddits from "../../pages/subreddits/subreddits.jsx";
 
 function Feed() {
   return (
     <div>
-      <Posts />
+      <Subreddits />
     </div>
   );
 }

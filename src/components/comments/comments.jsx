@@ -1,7 +1,12 @@
 import React from "react";
 
-function Comments() {
-  return <div>Comments</div>;
+function Comments({ comment }) {
+  return (
+    <div className="comment-wrap">
+      {console.log("on comment comp: ", comment)}
+      <div>{comment.body}</div>
+    </div>
+  );
 }
 
 export default Comments;
