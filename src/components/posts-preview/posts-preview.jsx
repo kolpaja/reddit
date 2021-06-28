@@ -1,5 +1,6 @@
 import React from "react";
 import "./posts-preview.scss";
+import { PostedTime } from "../../utilities/functions";
 
 import { Link } from "react-router-dom";
 
@@ -41,6 +42,10 @@ function PostsPreview({ post, handle }) {
               "{body}" - <span className="post-user">{user}</span>
             </p>
             <img src={image} />
+          </div>
+          <div className="post-footer">
+            <span className="post-comments">0 comments</span>
+            <span>posted {PostedTime(createdAt)}</span>
           </div>
         </div>
       </div>
