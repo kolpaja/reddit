@@ -10,6 +10,7 @@ function Posts({ location }) {
   const createdAt = moment(subreddit.createdAt).format("MMMM Do, YYYY");
 
   const [posts, setPosts] = useState([]);
+  const [sortType, setSortType] = useState("titleAsc");
 
   useEffect(() => {
     axios({
@@ -21,45 +22,78 @@ function Posts({ location }) {
       })
       .catch((error) => console.log(error));
   }, []);
+
   console.log("posts: ", posts);
-  //onChange={(e) => setSortType(e.target.value)}
 
-  // console.log(
-  //   "✔posts on sort asc title: ",
-  //   posts.sort(function (a, b) {
-  //     return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
-  //   })
-  // );
-  // console.log(
-  //   "✔posts on sort desc title: ",
-  //   posts.sort(function (a, b) {
-  //     return a.title > b.title ? -1 : a.title < b.title ? 1 : 0;
-  //   })
-  // );
+  const dateAsc = () =>
+    setPosts(
+      posts.sort(function (a, b) {
+        return a.createdAt > b.createdAt
+          ? -1
+          : a.createdAt < b.createdAt
+          ? 1
+          : 0;
+      })
+    );
 
-  // console.log(
-  //   "✔posts on sort asc date: ",
-  //   posts.sort(function (a, b) {
-  //     return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
-  //   })
-  // );
-  // console.log(
-  //   "✔posts on sort desc date: ",
-  //   posts.sort(function (a, b) {
-  //     return a.createdAt > b.createdAt ? 1 : a.createdAt < b.createdAt ? -1 : 0;
-  //   })
-  // );
+  const dateDesc = () =>
+    setPosts(
+      posts.sort(function (a, b) {
+        return a.createdAt > b.createdAt
+          ? 1
+          : a.createdAt < b.createdAt
+          ? -1
+          : 0;
+      })
+    );
 
-  const [sortType, setsortType] = useState();
+  const titleAsc = () =>
+    setPosts(
+      posts.sort(function (a, b) {
+        return a.title > b.title.toUpperCase()
+          ? -1
+          : a.title.toUpperCase() < b.title.toUpperCase()
+          ? 1
+          : 0;
+      })
+    );
+  const titleDesc = () =>
+    setPosts(
+      posts.sort(function (a, b) {
+        return a.title.toUpperCase() > b.title.toUpperCase()
+          ? 1
+          : a.title.toUpperCase() < b.title.toUpperCase()
+          ? -1
+          : 0;
+      })
+    );
 
-  useEffect(() => {}, [sortType]);
+  useEffect(() => {
+    switch (sortType) {
+      case "dateAsc":
+        return dateAsc();
+      case "dateDesc":
+        return dateDesc();
+      case "titleAsc":
+        return titleAsc();
+      case "titleDesc":
+        return titleDesc();
+      default:
+        break;
+    }
+  }, [sortType]);
+
   return (
     <div key={subredditId} className="posts-page">
       <div className="subreddit-posts">
         <div className="posts-sort">
           <div className="sort-select">
             <label htmlFor="sort-by">Sort by:</label>
-            <select name="sort" id="sort-by">
+            <select
+              name="sort"
+              id="sort-by"
+              onChange={(e) => setSortType(e.target.value)}
+            >
               <option value="titleAsc">Title asc</option>
               <option value="titleDesc">Title desc</option>
               <option value="dateAsc">Date asc</option>
@@ -68,9 +102,15 @@ function Posts({ location }) {
           </div>
         </div>
 
-        {posts.map((post) => (
-          <PostsPreview key={post.id} post={post} handle={subreddit.handle} />
-        ))}
+        {posts && posts.length > 0
+          ? posts.map((post) => (
+              <PostsPreview
+                key={post.id}
+                post={post}
+                handle={subreddit.handle}
+              />
+            ))
+          : "...loading"}
       </div>
       <div className="subreddit-wrap">
         <h1>Subreddit {subreddit.title}</h1>
