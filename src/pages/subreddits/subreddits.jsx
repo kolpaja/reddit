@@ -13,7 +13,6 @@ function Subreddits() {
     })
       .then((res) => {
         setSubReddits(res.data);
-        console.log("Subreddits: ", res.data);
       })
       .catch((error) => console.log(error));
   }, []);

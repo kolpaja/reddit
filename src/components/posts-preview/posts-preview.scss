@@ -1,6 +1,5 @@
 .posts-preview{
     display: flex;
-
     background-color: #fff;
     margin-bottom: 30px;
     border-radius: 10px;
@@ -51,9 +50,10 @@
         }
 
         .post-body{
+            padding-left: 20px;
             .post-title{
                 text-transform: capitalize;
-                font-size: 25px;
+                font-size: 24px;
                 font-weight: 700;
             }
             .post-details{
@@ -75,10 +75,23 @@
                 }
             }
             .post-footer{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
                 padding-top: 10px;
+                min-height: 20px;
+
+                .post-comments-nr{
+                    cursor: pointer;
+                    padding: 5px;
+
+                    &:hover{
+                        background-color: rgb(199, 193, 193);;
+                        border-radius: 7px;
+                        padding: 5 10px;
+                        transition: 0.256s ease-in;
+                    }
+                }
             }
         }
     }

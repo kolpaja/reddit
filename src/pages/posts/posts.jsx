@@ -7,34 +7,63 @@ import PostsPreview from "../../components/posts-preview/posts-preview";
 function Posts({ location }) {
   const { subreddit } = location.state;
   const subredditId = subreddit.id;
-  console.log("Posts restProps: ", subreddit);
-
   const createdAt = moment(subreddit.createdAt).format("MMMM Do, YYYY");
 
   const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     axios({
       method: "get",
       url: `https://6040c786f34cf600173c8cb7.mockapi.io/subreddits/${subredditId}/posts/`,
-      responseType: "stream",
     })
       .then((res) => {
         setPosts(res.data);
-        console.log("posts", res.data);
       })
       .catch((error) => console.log(error));
   }, []);
+  console.log("posts: ", posts);
+  //onChange={(e) => setSortType(e.target.value)}
+
+  // console.log(
+  //   "✔posts on sort asc title: ",
+  //   posts.sort(function (a, b) {
+  //     return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
+  //   })
+  // );
+  // console.log(
+  //   "✔posts on sort desc title: ",
+  //   posts.sort(function (a, b) {
+  //     return a.title > b.title ? -1 : a.title < b.title ? 1 : 0;
+  //   })
+  // );
+
+  // console.log(
+  //   "✔posts on sort asc date: ",
+  //   posts.sort(function (a, b) {
+  //     return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
+  //   })
+  // );
+  // console.log(
+  //   "✔posts on sort desc date: ",
+  //   posts.sort(function (a, b) {
+  //     return a.createdAt > b.createdAt ? 1 : a.createdAt < b.createdAt ? -1 : 0;
+  //   })
+  // );
+
+  const [sortType, setsortType] = useState();
+
+  useEffect(() => {}, [sortType]);
   return (
     <div key={subredditId} className="posts-page">
       <div className="subreddit-posts">
         <div className="posts-sort">
           <div className="sort-select">
-            <label for="sort-by">Sort by:</label>
+            <label htmlFor="sort-by">Sort by:</label>
             <select name="sort" id="sort-by">
-              <option value="title-asc">Title asc</option>
-              <option value="title-desc">Title desc</option>
-              <option value="date-asc">Date asc</option>
-              <option value="date-desc">Date desc</option>
+              <option value="titleAsc">Title asc</option>
+              <option value="titleDesc">Title desc</option>
+              <option value="dateAsc">Date asc</option>
+              <option value="dateDesc">Date desc</option>
             </select>
           </div>
         </div>

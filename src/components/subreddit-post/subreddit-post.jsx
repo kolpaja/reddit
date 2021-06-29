@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import "./subreddit-post.styles.scss";
 import Comments from "../comments/comments";
+import { PostedTime } from "../../utilities/functions";
 
 function SubredditPost({ ...props }) {
   console.log("🚀from subreddit-post", props);
-  const { post } = props.location.state;
-
-  const [comments, setcomments] = useState([]);
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `https://6040c786f34cf600173c8cb7.mockapi.io/subreddits/${post.subredditId}/posts/${post.id}/comments`,
-      responseType: "stream",
-    })
-      .then((res) => {
-        setcomments(res.data);
-        console.log("comments", res.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const { post, comments } = props.location.state;
+  const votes = post.upvotes - post.downvotes;
   return (
-    <div>
-      <h1>Title: {post.title}</h1>
-      <div>
+    <div key={post.id} className="subreddit-post">
+      <div className="post-wrap">
+        <div className="post-vote">
+          <i className="fas fa-arrow-up upvote"></i>
+          <span className="number-votes">{votes}</span>
+          <i className="fas fa-arrow-down downvote"></i>
+        </div>
+        <div className="post-body">
+          <div className="post-title">{post.title}</div>
+          <div className="post-details">
+            <p>
+              "{post.body}" - <span className="post-user">{post.user}</span>
+            </p>
+            <img src={post.image} />
+          </div>
+          <div className="post-footer">
+            <span>posted {PostedTime(post.createdAt)}</span>
+          </div>
+        </div>
+      </div>
+      <div className="post-comments">
         {comments.map((comment) => (
-          <Comments comment={comment} />
+          <Comments comment={comment} key={comment.id} />
         ))}
       </div>
     </div>
