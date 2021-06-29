@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./posts-preview.scss";
-import axios from "axios";
+
 import { PostedTime } from "../../utilities/functions";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useComments from "../../hooks/useComments";
 
 function PostsPreview({ post, handle }) {
   const {
@@ -16,20 +17,7 @@ function PostsPreview({ post, handle }) {
     user,
     body,
   } = post;
-
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `https://6040c786f34cf600173c8cb7.mockapi.io/subreddits/${subredditId}/posts/${id}/comments`,
-    })
-      .then((res) => {
-        setComments(res.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
+  const { comments } = useComments(subredditId, id);
   const votes = upvotes - downvotes;
   return (
     <div key={id} className="posts-preview">

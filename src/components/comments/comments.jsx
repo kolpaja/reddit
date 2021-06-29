@@ -4,7 +4,6 @@ import "./comments.styles.scss";
 import { PostedTime } from "../../utilities/functions";
 
 function Comments({ comment }) {
-  console.log("📃comment: ", comment);
   return (
     <div className="comment-preview">
       <div className="comment-wrap">

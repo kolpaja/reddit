@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./posts.styles.scss";
-import axios from "axios";
+
+import usePosts from "../../hooks/usePosts";
 import moment from "moment";
 import PostsPreview from "../../components/posts-preview/posts-preview";
 
@@ -9,64 +10,39 @@ function Posts({ location }) {
   const subredditId = subreddit.id;
   const createdAt = moment(subreddit.createdAt).format("MMMM Do, YYYY");
 
-  const [posts, setPosts] = useState([]);
-  const [sortType, setSortType] = useState("titleAsc");
+  const { posts } = usePosts(subredditId);
 
-  useEffect(() => {
-    axios({
-      method: "get",
-      url: `https://6040c786f34cf600173c8cb7.mockapi.io/subreddits/${subredditId}/posts/`,
-    })
-      .then((res) => {
-        setPosts(res.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const [sortType, setSortType] = useState();
 
   console.log("posts: ", posts);
 
   const dateAsc = () =>
-    setPosts(
-      posts.sort(function (a, b) {
-        return a.createdAt > b.createdAt
-          ? -1
-          : a.createdAt < b.createdAt
-          ? 1
-          : 0;
-      })
-    );
+    posts.sort(function (a, b) {
+      return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
+    });
 
   const dateDesc = () =>
-    setPosts(
-      posts.sort(function (a, b) {
-        return a.createdAt > b.createdAt
-          ? 1
-          : a.createdAt < b.createdAt
-          ? -1
-          : 0;
-      })
-    );
+    posts.sort(function (a, b) {
+      return a.createdAt > b.createdAt ? 1 : a.createdAt < b.createdAt ? -1 : 0;
+    });
 
   const titleAsc = () =>
-    setPosts(
-      posts.sort(function (a, b) {
-        return a.title > b.title.toUpperCase()
-          ? -1
-          : a.title.toUpperCase() < b.title.toUpperCase()
-          ? 1
-          : 0;
-      })
-    );
+    posts.sort(function (a, b) {
+      return a.title > b.title.toUpperCase()
+        ? -1
+        : a.title.toUpperCase() < b.title.toUpperCase()
+        ? 1
+        : 0;
+    });
+
   const titleDesc = () =>
-    setPosts(
-      posts.sort(function (a, b) {
-        return a.title.toUpperCase() > b.title.toUpperCase()
-          ? 1
-          : a.title.toUpperCase() < b.title.toUpperCase()
-          ? -1
-          : 0;
-      })
-    );
+    posts.sort(function (a, b) {
+      return a.title.toUpperCase() > b.title.toUpperCase()
+        ? 1
+        : a.title.toUpperCase() < b.title.toUpperCase()
+        ? -1
+        : 0;
+    });
 
   useEffect(() => {
     switch (sortType) {

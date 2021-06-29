@@ -26,6 +26,9 @@
         }
         .header_search{
             position: relative;
+            margin-left: 20px;
+            outline: none;
+            
             .search{
                 width: 456px;
                 height: 40px;
@@ -33,6 +36,9 @@
                 padding: 0 40px; 
                 font-size: 24px;
                 color: rgba(0,0,0,0.8);
+                border: 1px solid rgba(0,0,0,0.2); 
+                border-radius: 20px;
+                outline: none;
             }
             .search_icon{
                 pointer-events: none;

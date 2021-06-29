@@ -1,12 +1,13 @@
 import React from "react";
 import "./subreddit-post.styles.scss";
+
 import Comments from "../comments/comments";
 import { PostedTime } from "../../utilities/functions";
 
 function SubredditPost({ ...props }) {
-  console.log("🚀from subreddit-post", props);
   const { post, comments } = props.location.state;
   const votes = post.upvotes - post.downvotes;
+
   return (
     <div key={post.id} className="subreddit-post">
       <div className="post-wrap">
