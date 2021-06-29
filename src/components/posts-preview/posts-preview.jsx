@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./posts-preview.scss";
 
 import { PostedTime } from "../../utilities/functions";
@@ -18,14 +18,43 @@ function PostsPreview({ post, handle }) {
     body,
   } = post;
   const { comments } = useComments(subredditId, id);
-  const votes = upvotes - downvotes;
+  const upVotingClass = document.querySelector(`.postup${id}`);
+  const downVotingClass = document.querySelector(`.postdown${id}`);
+
+  const [upvoted, setUpvoted] = useState(upvotes);
+  const [downvoted, setDownvoted] = useState(downvotes);
+  let votes = upvoted - downvoted;
+
+  const upVoted = () => {
+    setUpvoted(upvoted + 1);
+
+    console.log("voting class query selected: ", id, upVotingClass);
+    upVotingClass.classList.add("upvoted");
+    downVotingClass.classList.remove("downvoted");
+  };
+  const downVoted = () => {
+    setDownvoted(downvoted + 1);
+    upVotingClass.classList.remove("upvoted");
+    downVotingClass.classList.add("downvoted");
+  };
+
+  useEffect(() => {
+    console.log("useeffect");
+  }, []);
+
   return (
     <div key={id} className="posts-preview">
       <div className="post-wrap">
         <div className="post-vote">
-          <i className="fas fa-arrow-up upvote"></i>
+          <i
+            className={`fas fa-arrow-up upvote postup${id}`}
+            onClick={upVoted}
+          ></i>
           <span className="number-votes">{votes}</span>
-          <i className="fas fa-arrow-down downvote"></i>
+          <i
+            className={`fas fa-arrow-down downvote postdown${id}`}
+            onClick={downVoted}
+          ></i>
         </div>
         <div className="post-body">
           <div className="post-title">

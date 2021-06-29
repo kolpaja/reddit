@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import "./comments.styles.scss";
 
 import { PostedTime } from "../../utilities/functions";
 
 function Comments({ comment }) {
+  const [upvoted, setUpvoted] = useState(0);
+  const [downvoted, setDownvoted] = useState(0);
+
+  const upVote = () => {
+    setUpvoted(upvoted + 1);
+    console.log("⬆ upvoted");
+  };
+  const downVote = () => {
+    setDownvoted(downvoted + 1);
+    console.log("⬆ downvoted");
+  };
+
+  let votes = upvoted - downvoted;
   return (
     <div className="comment-preview">
       <div className="comment-wrap">
         <div className="comment-vote">
-          <i className="fas fa-arrow-up upvote"></i>
-          <span className="number-votes">0</span>
-          <i className="fas fa-arrow-down downvote"></i>
+          <i className="fas fa-arrow-up upvote-comment" onClick={upVote}></i>
+          <span className="number-votes">{votes}</span>
+          <i
+            className="fas fa-arrow-down downvote-comment"
+            onClick={downVote}
+          ></i>
         </div>
         <div className="comment-body">
           <div className="comment-user">

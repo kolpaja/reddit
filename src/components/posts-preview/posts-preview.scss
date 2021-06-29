@@ -31,9 +31,14 @@
                 cursor: pointer;
                 padding: 3px;
                 &:hover{
-                    background-color: rgb(199, 193, 193);
+                    background-color: rgb(209, 205, 205);
                     color: rgb(8, 240, 170);
                 }
+            }
+
+            .upvoted{
+                background-color: rgb(209, 205, 205);
+                color: rgb(8, 240, 170) 
             }
             .number-votes{
                 margin: 8px 0
@@ -43,9 +48,14 @@
                 cursor: pointer;
                 padding: 3px;
                 &:hover{
-                    background-color: rgb(199, 193, 193);
+                    background-color: rgb(209, 205, 205);
                     color: rgb(248, 38, 38);
                 }
+            }
+
+            .downvoted{
+                background-color: rgb(209, 205, 205);
+                color: rgb(248, 38, 38);
             }
         }
 
