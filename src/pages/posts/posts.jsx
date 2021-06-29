@@ -4,6 +4,7 @@ import "./posts.styles.scss";
 import usePosts from "../../hooks/usePosts";
 import moment from "moment";
 import PostsPreview from "../../components/posts-preview/posts-preview";
+import Spinner from "../../components/spinner/spinner";
 
 function Posts({ location }) {
   const { subreddit } = location.state;
@@ -78,15 +79,13 @@ function Posts({ location }) {
           </div>
         </div>
 
-        {posts && posts.length > 0
-          ? posts.map((post) => (
-              <PostsPreview
-                key={post.id}
-                post={post}
-                handle={subreddit.handle}
-              />
-            ))
-          : "...loading"}
+        {posts && posts.length > 0 ? (
+          posts.map((post) => (
+            <PostsPreview key={post.id} post={post} handle={subreddit.handle} />
+          ))
+        ) : (
+          <Spinner />
+        )}
       </div>
       <div className="subreddit-wrap">
         <h1>Subreddit {subreddit.title}</h1>
