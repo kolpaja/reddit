@@ -5,6 +5,7 @@ import usePosts from "../../hooks/usePosts";
 import moment from "moment";
 import PostsPreview from "../posts-preview/posts-preview";
 import Spinner from "../spinner/spinner";
+import Header from "../header/header";
 
 function Posts({ location }) {
   const { subreddit } = location.state;
@@ -62,43 +63,50 @@ function Posts({ location }) {
   }));
 
   return (
-    <div key={subredditId} className="posts-page">
-      <div className="subreddit-posts">
-        <div className="posts-sort">
-          <div className="sort-select">
-            <label htmlFor="sort-by">Sort by:</label>
-            <select
-              name="sort"
-              id="sort-by"
-              onChange={(e) => setSortType(e.target.value)}
-            >
-              <option value="titleAsc">Title asc</option>
-              <option value="titleDesc">Title desc</option>
-              <option value="dateAsc">Date asc</option>
-              <option value="dateDesc">Date desc</option>
-            </select>
+    <div>
+      <Header />
+      <div key={subredditId} className="posts-page">
+        <div className="subreddit-posts">
+          <div className="posts-sort">
+            <div className="sort-select">
+              <label htmlFor="sort-by">Sort by:</label>
+              <select
+                name="sort"
+                id="sort-by"
+                onChange={(e) => setSortType(e.target.value)}
+              >
+                <option value="titleAsc">Title asc</option>
+                <option value="titleDesc">Title desc</option>
+                <option value="dateAsc">Date asc</option>
+                <option value="dateDesc">Date desc</option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        {mappedPosts && mappedPosts.length > 0 ? (
-          mappedPosts.map((post) => (
-            <PostsPreview key={post.id} post={post} handle={subreddit.handle} />
-          ))
-        ) : (
-          <Spinner />
-        )}
-      </div>
-      <div className="subreddit-wrap">
-        <h1>Subreddit {subreddit.title}</h1>
-        <p>
-          In this subreddit anyone can ask anything about {subreddit.handle}.
-          You can share photos, videos and links. Please be respectful!
-        </p>
-        <div>
-          <span>
-            admin <span className="subreddit-admin">{subreddit.admin}</span>
-          </span>
-          <span>created on {createdAt}</span>
+          {mappedPosts && mappedPosts.length > 0 ? (
+            mappedPosts.map((post) => (
+              <PostsPreview
+                key={post.id}
+                post={post}
+                handle={subreddit.handle}
+              />
+            ))
+          ) : (
+            <Spinner />
+          )}
+        </div>
+        <div className="subreddit-wrap">
+          <h1>Subreddit {subreddit.title}</h1>
+          <p>
+            In this subreddit anyone can ask anything about {subreddit.handle}.
+            You can share photos, videos and links. Please be respectful!
+          </p>
+          <div>
+            <span>
+              admin <span className="subreddit-admin">{subreddit.admin}</span>
+            </span>
+            <span>created on {createdAt}</span>
+          </div>
         </div>
       </div>
     </div>
