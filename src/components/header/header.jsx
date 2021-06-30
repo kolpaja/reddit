@@ -5,7 +5,7 @@ import search_icon from "../../assets/search_icon.svg";
 
 import "./header.styles.scss";
 
-function Header() {
+function Header({ handleChange }) {
   return (
     <div className="header">
       <div className="header_nav_left">
@@ -16,7 +16,12 @@ function Header() {
           </a>
         </div>
         <div className="header_search">
-          <input type="text" placeholder="search" className="search" />
+          <input
+            type="text"
+            placeholder="search"
+            className="search"
+            onChange={handleChange}
+          />
           <img src={search_icon} alt="" className="search_icon" />
         </div>
       </div>
