@@ -54,7 +54,6 @@ function PostsPreview({ post, handle }) {
       upVotingClass.classList.remove("upvoted");
       downVotingClass.classList.add("downvoted");
     } else if (post.isDownVoted === true) {
-      console.log("its downvoted mo!");
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
       downVotingClass.classList.remove("downvoted");

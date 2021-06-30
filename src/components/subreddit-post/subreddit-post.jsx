@@ -13,8 +13,8 @@ function SubredditPost({ ...props }) {
     isDownVoted: false,
   }));
 
-  const upVotingClass = document.querySelector(`.postup${post.id}`);
-  const downVotingClass = document.querySelector(`.postdown${post.id}`);
+  const upVotingPostClass = document.querySelector(`.postup${post.id}`);
+  const downVotingPostClass = document.querySelector(`.postdown${post.id}`);
 
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);
@@ -26,17 +26,17 @@ function SubredditPost({ ...props }) {
       setDownvoted(downvoted - 1);
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingClass.classList.add("upvoted");
-      downVotingClass.classList.remove("downvoted");
+      upVotingPostClass.classList.add("post-upvoted");
+      downVotingPostClass.classList.remove("post-downvoted");
     } else if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
-      upVotingClass.classList.remove("upvoted");
+      upVotingPostClass.classList.remove("post-upvoted");
     } else if (post.isUpVoted === false) {
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingClass.classList.add("upvoted");
-      downVotingClass.classList.remove("downvoted");
+      upVotingPostClass.classList.add("post-upvoted");
+      downVotingPostClass.classList.remove("post-downvoted");
     }
   };
   const downVote = () => {
@@ -45,17 +45,16 @@ function SubredditPost({ ...props }) {
       setUpvoted(upvoted - 1);
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      upVotingClass.classList.remove("upvoted");
-      downVotingClass.classList.add("downvoted");
+      upVotingPostClass.classList.remove("post-upvoted");
+      downVotingPostClass.classList.add("post-downvoted");
     } else if (post.isDownVoted === true) {
-      console.log("its downvoted mo!");
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
-      downVotingClass.classList.remove("downvoted");
+      downVotingPostClass.classList.remove("post-downvoted");
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      downVotingClass.classList.add("downvoted");
+      downVotingPostClass.classList.add("post-downvoted");
     }
   };
 
