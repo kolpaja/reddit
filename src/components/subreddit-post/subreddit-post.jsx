@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./subreddit-post.styles.scss";
 
 import Comments from "../comments/comments";
@@ -6,21 +6,22 @@ import { PostedTime } from "../../utilities/functions";
 
 function SubredditPost({ ...props }) {
   const { post, comments } = props.location.state;
+  const { id } = post;
 
   const mappedComments = comments.map((comment) => ({
     ...comment,
     isUpVoted: false,
     isDownVoted: false,
   }));
-
-  const upVotingPostClass = document.querySelector(`.postup${post.id}`);
-  const downVotingPostClass = document.querySelector(`.postdown${post.id}`);
+  console.log("postId: ", id);
+  const upVotingPostClass = document.querySelector(".fa-arrow-up");
+  const downVotingPostClass = document.querySelector(".fa-arrow-down");
 
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);
   let votes = upvoted - downvoted;
 
-  const upVote = () => {
+  const upVotePost = () => {
     if (post.isDownVoted === true) {
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
@@ -39,7 +40,7 @@ function SubredditPost({ ...props }) {
       downVotingPostClass.classList.remove("post-downvoted");
     }
   };
-  const downVote = () => {
+  const downVotePost = () => {
     if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
@@ -57,20 +58,16 @@ function SubredditPost({ ...props }) {
       downVotingPostClass.classList.add("post-downvoted");
     }
   };
-
+  useEffect(() => {
+    console.log("useeffect");
+  }, []);
   return (
     <div key={post.id} className="subreddit-post">
       <div className="post-wrap">
         <div className="post-vote">
-          <i
-            className={`fas fa-arrow-up upvote postup${post.id}`}
-            onClick={upVote}
-          ></i>
+          <i className="fas fa-arrow-up upvote" onClick={upVotePost}></i>
           <span className="number-votes">{votes}</span>
-          <i
-            className={`fas fa-arrow-down downvote postdown${post.id}`}
-            onClick={downVote}
-          ></i>
+          <i className="fas fa-arrow-down downvote" onClick={downVotePost}></i>
         </div>
         <div className="post-body">
           <div className="post-title">{post.title}</div>

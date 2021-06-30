@@ -18,7 +18,6 @@ function PostsPreview({ post, handle }) {
     body,
   } = post;
   const { comments } = useComments(subredditId, id);
-
   const upVotingClass = document.querySelector(`.postup${id}`);
   const downVotingClass = document.querySelector(`.postdown${id}`);
 
@@ -45,6 +44,7 @@ function PostsPreview({ post, handle }) {
       downVotingClass.classList.remove("downvoted");
     }
   };
+
   const downVote = () => {
     if (post.isUpVoted === true) {
       post.isUpVoted = false;
@@ -63,6 +63,10 @@ function PostsPreview({ post, handle }) {
       downVotingClass.classList.add("downvoted");
     }
   };
+
+  useEffect(() => {
+    console.log("useeffect");
+  }, []);
 
   return (
     <div key={id} className="posts-preview">
