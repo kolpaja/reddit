@@ -4,9 +4,9 @@ import "./subreddit-post.styles.scss";
 import Comments from "../comments/comments";
 import { PostedTime } from "../../utilities/functions";
 
-function SubredditPost({ ...props }) {
-  const { post, comments } = props.location.state;
-  const { id } = post;
+function SubredditPost({ location }) {
+  const { comments } = location.state;
+  const post = location.state.unVotePost;
 
   const mappedComments = comments.map((comment) => ({
     ...comment,

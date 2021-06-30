@@ -6,23 +6,14 @@ import { Link } from "react-router-dom";
 import useComments from "../../hooks/useComments";
 
 function PostsPreview({ post, handle }) {
-  const {
-    id,
-    subredditId,
-    title,
-    createdAt,
-    upvotes,
-    downvotes,
-    image,
-    user,
-    body,
-  } = post;
-  const { comments } = useComments(subredditId, id);
-  const upVotingClass = document.querySelector(`.postup${id}`);
-  const downVotingClass = document.querySelector(`.postdown${id}`);
+  console.log("is post voted: ", post);
 
-  const [upvoted, setUpvoted] = useState(upvotes);
-  const [downvoted, setDownvoted] = useState(downvotes);
+  const { comments } = useComments(post.subredditId, post.id);
+  const upVotingClass = document.querySelector(`.postup${post.id}`);
+  const downVotingClass = document.querySelector(`.postdown${post.id}`);
+
+  const [upvoted, setUpvoted] = useState(post.upvotes);
+  const [downvoted, setDownvoted] = useState(post.downvotes);
   let votes = upvoted - downvoted;
 
   const upVote = () => {
@@ -67,18 +58,18 @@ function PostsPreview({ post, handle }) {
   useEffect(() => {
     console.log("useeffect");
   }, []);
-
+  const unVotePost = { ...post, isUpVoted: false, isDownVoted: false };
   return (
-    <div key={id} className="posts-preview">
+    <div key={post.id} className="posts-preview">
       <div className="post-wrap">
         <div className="post-vote">
           <i
-            className={`fas fa-arrow-up upvote postup${id}`}
+            className={`fas fa-arrow-up upvote postup${post.id}`}
             onClick={upVote}
           ></i>
           <span className="number-votes">{votes}</span>
           <i
-            className={`fas fa-arrow-down downvote postdown${id}`}
+            className={`fas fa-arrow-down downvote postdown${post.id}`}
             onClick={downVote}
           ></i>
         </div>
@@ -86,25 +77,25 @@ function PostsPreview({ post, handle }) {
           <div className="post-title">
             <Link
               to={{
-                pathname: `/r/${handle}/${subredditId}/posts/${id}/`,
-                state: { id, handle, post, comments },
+                pathname: `/r/${handle}/${post.subredditId}/posts/${post.id}/`,
+                state: { handle, unVotePost, comments },
               }}
             >
-              <h1 key={id}>{title}</h1>
+              <h1 key={post.id}>{post.title}</h1>
             </Link>
           </div>
           <div className="post-details">
             <p>
-              "{body}" - <span className="post-user">{user}</span>
+              "{post.body}" - <span className="post-user">{post.user}</span>
             </p>
-            <img src={image} />
+            <img src={post.image} />
           </div>
           <div className="post-footer">
             <span className="post-comments-nr">
               <span className="number-comments">{comments.length}</span> comment
               {comments.length > 1 ? "s" : ""}
             </span>
-            <span>posted {PostedTime(createdAt)}</span>
+            <span>posted {PostedTime(post.createdAt)}</span>
           </div>
         </div>
       </div>
