@@ -6,27 +6,66 @@ import { PostedTime } from "../../utilities/functions";
 function Comments({ comment }) {
   const [upvoted, setUpvoted] = useState(0);
   const [downvoted, setDownvoted] = useState(0);
-  console.log("comment added voting prop: ", comment);
 
-  const upVote = () => {
-    setUpvoted(upvoted + 1);
-    console.log("⬆ upvoted");
-  };
-  const downVote = () => {
-    setDownvoted(downvoted + 1);
-    console.log("⬆ downvoted");
-  };
+  const upVotingCommentClass = document.querySelector(
+    `.comment-up${comment.id}`
+  );
+
+  const downVotingCommentClass = document.querySelector(
+    `.comment-down${comment.id}`
+  );
 
   let votes = upvoted - downvoted;
+
+  const upVoteComment = () => {
+    if (comment.isDownVoted === true) {
+      comment.isDownVoted = false;
+      setDownvoted(downvoted - 1);
+      comment.isUpVoted = true;
+      setUpvoted(upvoted + 1);
+      upVotingCommentClass.classList.add("upvoted-comment");
+      downVotingCommentClass.classList.remove("downvoted-comment");
+    } else if (comment.isUpVoted === true) {
+      comment.isUpVoted = false;
+      setUpvoted(upvoted - 1);
+      upVotingCommentClass.classList.remove("upvoted-comment");
+    } else if (comment.isUpVoted === false) {
+      comment.isUpVoted = true;
+      setUpvoted(upvoted + 1);
+      upVotingCommentClass.classList.add("upvoted-comment");
+      downVotingCommentClass.classList.remove("downvoted-comment");
+    }
+  };
+  const downVoteComment = () => {
+    if (comment.isUpVoted === true) {
+      comment.isUpVoted = false;
+      setUpvoted(upvoted - 1);
+      comment.isDownVoted = true;
+      setDownvoted(downvoted + 1);
+      upVotingCommentClass.classList.remove("upvoted-comment");
+      downVotingCommentClass.classList.add("downvoted-comment");
+    } else if (comment.isDownVoted === true) {
+      comment.isDownVoted = false;
+      setDownvoted(downvoted - 1);
+      downVotingCommentClass.classList.remove("downvoted-comment");
+    } else {
+      comment.isDownVoted = true;
+      setDownvoted(downvoted + 1);
+      downVotingCommentClass.classList.add("downvoted-comment");
+    }
+  };
   return (
     <div className="comment-preview">
       <div className="comment-wrap">
         <div className="comment-vote">
-          <i className="fas fa-arrow-up upvote-comment" onClick={upVote}></i>
+          <i
+            className={`fas fa-arrow-up upvote-comment comment-up${comment.id}`}
+            onClick={upVoteComment}
+          ></i>
           <span className="number-votes">{votes}</span>
           <i
-            className="fas fa-arrow-down downvote-comment"
-            onClick={downVote}
+            className={`fas fa-arrow-down downvote-comment comment-down${comment.id}`}
+            onClick={downVoteComment}
           ></i>
         </div>
         <div className="comment-body">

@@ -18,6 +18,7 @@ function PostsPreview({ post, handle }) {
     body,
   } = post;
   const { comments } = useComments(subredditId, id);
+
   const upVotingClass = document.querySelector(`.postup${id}`);
   const downVotingClass = document.querySelector(`.postdown${id}`);
 
@@ -25,12 +26,6 @@ function PostsPreview({ post, handle }) {
   const [downvoted, setDownvoted] = useState(downvotes);
   let votes = upvoted - downvoted;
 
-  console.log(
-    "initial votes=> post.isUpVoted: " +
-      post.isUpVoted +
-      "|| post.isDownVoted: " +
-      post.isDownVoted
-  );
   const upVote = () => {
     if (post.isDownVoted === true) {
       post.isDownVoted = false;
@@ -40,19 +35,15 @@ function PostsPreview({ post, handle }) {
       upVotingClass.classList.add("upvoted");
       downVotingClass.classList.remove("downvoted");
     } else if (post.isUpVoted === true) {
-      return console.log("its upvoted mo!");
+      post.isUpVoted = false;
+      setUpvoted(upvoted - 1);
+      upVotingClass.classList.remove("upvoted");
     } else if (post.isUpVoted === false) {
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
       upVotingClass.classList.add("upvoted");
       downVotingClass.classList.remove("downvoted");
     }
-    console.log(
-      "on UPVOTE=> post.isUpVoted: " +
-        post.isUpVoted +
-        "|| post.isDownVoted: " +
-        post.isDownVoted
-    );
   };
   const downVote = () => {
     if (post.isUpVoted === true) {
@@ -63,24 +54,16 @@ function PostsPreview({ post, handle }) {
       upVotingClass.classList.remove("upvoted");
       downVotingClass.classList.add("downvoted");
     } else if (post.isDownVoted === true) {
-      return console.log("its downvoted mo!");
+      console.log("its downvoted mo!");
+      post.isDownVoted = false;
+      setDownvoted(downvoted - 1);
+      downVotingClass.classList.remove("downvoted");
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
       downVotingClass.classList.add("downvoted");
     }
-
-    console.log(
-      "on DOWNVOTE=> post.isUpVoted: " +
-        post.isUpVoted +
-        "|| post.isDownVoted: " +
-        post.isDownVoted
-    );
   };
-
-  // useEffect(() => {
-  //   console.log("useeffect");
-  // }, []);
 
   return (
     <div key={id} className="posts-preview">
