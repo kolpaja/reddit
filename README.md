@@ -1,4 +1,4 @@
-# Reddit-Clone <a href="https://www.reddit.com"><img src="src/assets/reddit_social media_icon.svg" alt="gmail" height="25" width="25"/></a> [<img src="/img/linkedin.svg"/>] with Create React App
+# Reddit-Clone <a href="https://www.reddit.com"><img src="src/assets/reddit_social media_icon.svg" alt="gmail" height="25" width="25"/></a> with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
