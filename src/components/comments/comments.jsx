@@ -6,6 +6,7 @@ import { PostedTime } from "../../utilities/functions";
 function Comments({ comment }) {
   const [upvoted, setUpvoted] = useState(0);
   const [downvoted, setDownvoted] = useState(0);
+  console.log("comment added voting prop: ", comment);
 
   const upVote = () => {
     setUpvoted(upvoted + 1);

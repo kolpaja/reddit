@@ -7,6 +7,13 @@ import { PostedTime } from "../../utilities/functions";
 function SubredditPost({ ...props }) {
   const { post, comments } = props.location.state;
   const votes = post.upvotes - post.downvotes;
+  console.log("single post: ", post);
+
+  const mappedComments = comments.map((comment) => ({
+    ...comment,
+    isUpvoted: false,
+    isDownvoted: false,
+  }));
 
   return (
     <div key={post.id} className="subreddit-post">
@@ -30,7 +37,7 @@ function SubredditPost({ ...props }) {
         </div>
       </div>
       <div className="post-comments">
-        {comments.map((comment) => (
+        {mappedComments.map((comment) => (
           <Comments comment={comment} key={comment.id} />
         ))}
       </div>

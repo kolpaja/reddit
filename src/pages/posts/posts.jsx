@@ -15,8 +15,6 @@ function Posts({ location }) {
 
   const [sortType, setSortType] = useState();
 
-  console.log("posts: ", posts);
-
   const dateAsc = () =>
     posts.sort(function (a, b) {
       return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
@@ -60,6 +58,12 @@ function Posts({ location }) {
     }
   }, [sortType]);
 
+  const mappedPosts = posts.map((post) => ({
+    ...post,
+    isUpVoted: false,
+    isDownVoted: false,
+  }));
+
   return (
     <div key={subredditId} className="posts-page">
       <div className="subreddit-posts">
@@ -79,8 +83,8 @@ function Posts({ location }) {
           </div>
         </div>
 
-        {posts && posts.length > 0 ? (
-          posts.map((post) => (
+        {mappedPosts && mappedPosts.length > 0 ? (
+          mappedPosts.map((post) => (
             <PostsPreview key={post.id} post={post} handle={subreddit.handle} />
           ))
         ) : (
