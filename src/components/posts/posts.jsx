@@ -3,8 +3,8 @@ import "./posts.styles.scss";
 
 import usePosts from "../../hooks/usePosts";
 import moment from "moment";
-import PostsPreview from "../../components/posts-preview/posts-preview";
-import Spinner from "../../components/spinner/spinner";
+import PostsPreview from "../posts-preview/posts-preview";
+import Spinner from "../spinner/spinner";
 
 function Posts({ location }) {
   const { subreddit } = location.state;

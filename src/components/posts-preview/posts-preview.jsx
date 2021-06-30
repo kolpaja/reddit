@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import useComments from "../../hooks/useComments";
 
 function PostsPreview({ post, handle }) {
-  console.log("is post voted: ", post);
-
   const { comments } = useComments(post.subredditId, post.id);
   const upVotingClass = document.querySelector(`.postup${post.id}`);
   const downVotingClass = document.querySelector(`.postdown${post.id}`);

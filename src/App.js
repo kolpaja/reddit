@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // import Header from './components/header/header'
 import Home from "./pages/home/home"
-import Posts from './pages/posts/posts';
+import Posts from "./components/posts/posts"
 import SubredditPost from './components/subreddit-post/subreddit-post';
 
 function App() {

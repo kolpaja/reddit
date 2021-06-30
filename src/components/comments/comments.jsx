@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./comments.styles.scss";
 
 import { PostedTime } from "../../utilities/functions";
@@ -6,15 +6,9 @@ import { PostedTime } from "../../utilities/functions";
 function Comments({ comment }) {
   const [upvoted, setUpvoted] = useState(0);
   const [downvoted, setDownvoted] = useState(0);
-
-  const upVotingCommentClass = document.querySelector(
-    `.comment-up${comment.id}`
-  );
-
-  const downVotingCommentClass = document.querySelector(
-    `.comment-down${comment.id}`
-  );
-
+  console.log("comment: ", comment);
+  const upVotingCommentClass = document.querySelector(".upvote-comment");
+  const downVotingCommentClass = document.querySelector(".downvote-comment");
   let votes = upvoted - downvoted;
 
   const upVoteComment = () => {
@@ -33,9 +27,9 @@ function Comments({ comment }) {
       comment.isUpVoted = true;
       setUpvoted(upvoted + 1);
       upVotingCommentClass.classList.add("upvoted-comment");
-      downVotingCommentClass.classList.remove("downvoted-comment");
     }
   };
+
   const downVoteComment = () => {
     if (comment.isUpVoted === true) {
       comment.isUpVoted = false;
@@ -54,17 +48,20 @@ function Comments({ comment }) {
       downVotingCommentClass.classList.add("downvoted-comment");
     }
   };
+  useEffect(() => {
+    console.log("useeffect");
+  }, []);
   return (
     <div className="comment-preview">
       <div className="comment-wrap">
         <div className="comment-vote">
           <i
-            className={`fas fa-arrow-up upvote-comment comment-up${comment.id}`}
+            className="fas fa-arrow-up upvote-comment"
             onClick={upVoteComment}
           ></i>
           <span className="number-votes">{votes}</span>
           <i
-            className={`fas fa-arrow-down downvote-comment comment-down${comment.id}`}
+            className="fas fa-arrow-down downvote-comment"
             onClick={downVoteComment}
           ></i>
         </div>
