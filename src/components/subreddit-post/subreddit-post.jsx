@@ -74,7 +74,7 @@ function SubredditPost({ location }) {
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
             </p>
-            <img src={post.image} />
+            <img src={post.image} alt="" />
           </div>
           <div className="post-footer">
             <span>posted {PostedTime(post.createdAt)}</span>

@@ -11,6 +11,7 @@ export default function usePosts(subredditId) {
             .then((res) => {
                 setPosts(res.data);
             })
+            // eslint-disable-next-line
             .catch((error) => console.log(error));
     }, []);
 

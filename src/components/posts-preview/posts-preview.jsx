@@ -86,7 +86,7 @@ function PostsPreview({ post, handle }) {
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
             </p>
-            <img src={post.image} />
+            <img src={post.image} alt="" />
           </div>
           <div className="post-footer">
             <span className="post-comments-nr">
