@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 
-import useSubreddits from "../../hooks/useSubreddits";
 import { Link } from "react-router-dom";
 import "./subreddits.styles.scss";
 import Spinner from "../../components/spinner/spinner";
 
-function Subreddits() {
-  const { subReddits } = useSubreddits();
+function Subreddits({ subreddits }) {
   return (
     <div className="subreddits-page">
-      {subReddits && subReddits.length > 0 ? (
-        subReddits.map((subreddit) => {
+      {subreddits && subreddits.length > 0 ? (
+        subreddits.map((subreddit) => {
           return (
             <div className="subreddit-wrap" key={subreddit.id}>
               <div key={subreddit.id} className="subreddit-item">

@@ -13,7 +13,6 @@ function SubredditPost({ ...props }) {
     isUpVoted: false,
     isDownVoted: false,
   }));
-  console.log("postId: ", id);
   const upVotingPostClass = document.querySelector(".fa-arrow-up");
   const downVotingPostClass = document.querySelector(".fa-arrow-down");
 

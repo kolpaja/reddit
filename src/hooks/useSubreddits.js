@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from "axios";
 
 export default function useSubreddits() {
-    const [subReddits, setSubReddits] = useState([]);
+    const [subreddits, setSubReddits] = useState([]);
     useEffect(() => {
         axios({
             method: "get",
@@ -13,5 +13,5 @@ export default function useSubreddits() {
             })
             .catch((error) => console.log(error));
     }, []);
-    return { subReddits }
+    return { subreddits }
 }

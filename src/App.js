@@ -7,7 +7,6 @@ import Home from "./pages/home/home"
 import Posts from './pages/posts/posts';
 import SubredditPost from './components/subreddit-post/subreddit-post';
 
-
 function App() {
 
   return (

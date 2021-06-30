@@ -11,19 +11,16 @@ function Posts({ location }) {
   const subredditId = subreddit.id;
   const createdAt = moment(subreddit.createdAt).format("MMMM Do, YYYY");
 
+  //fetch posts from endpoint
   const { posts } = usePosts(subredditId);
-
+  console.log("🚀 posts: ", posts);
   const [sortType, setSortType] = useState();
 
-  const dateAsc = () =>
-    posts.sort(function (a, b) {
-      return a.createdAt > b.createdAt ? -1 : a.createdAt < b.createdAt ? 1 : 0;
-    });
-
   const dateDesc = () =>
-    posts.sort(function (a, b) {
-      return a.createdAt > b.createdAt ? 1 : a.createdAt < b.createdAt ? -1 : 0;
-    });
+    posts.sort((a, b) => new moment(a.createdAt) - new moment(b.createdAt));
+
+  const dateAsc = () =>
+    posts.sort((a, b) => new moment(b.createdAt) - new moment(a.createdAt));
 
   const titleAsc = () =>
     posts.sort(function (a, b) {
