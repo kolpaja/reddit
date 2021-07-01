@@ -6,7 +6,7 @@ import { PostedTime } from "../../utilities/functions";
 function Comments({ comment }) {
   const [upvoted, setUpvoted] = useState(0);
   const [downvoted, setDownvoted] = useState(0);
-  console.log("comment: ", comment);
+
   const upVotingCommentClass = document.querySelector(".upvote-comment");
   const downVotingCommentClass = document.querySelector(".downvote-comment");
   let votes = upvoted - downvoted;

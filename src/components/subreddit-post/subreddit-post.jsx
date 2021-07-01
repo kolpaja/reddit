@@ -57,9 +57,8 @@ function SubredditPost({ location }) {
       downVotingPostClass.classList.add("post-downvoted");
     }
   };
-  useEffect(() => {
-    console.log("useeffect");
-  }, []);
+  useEffect(() => {}, []);
+
   return (
     <div key={post.id} className="subreddit-post">
       <div className="post-wrap">

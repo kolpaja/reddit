@@ -53,10 +53,10 @@ function PostsPreview({ post, handle }) {
     }
   };
 
-  useEffect(() => {
-    console.log("useeffect");
-  }, []);
+  useEffect(() => {}, []);
+
   const unVotePost = { ...post, isUpVoted: false, isDownVoted: false };
+
   return (
     <div key={post.id} className="posts-preview">
       <div className="post-wrap">
@@ -82,6 +82,7 @@ function PostsPreview({ post, handle }) {
               <h1 key={post.id}>{post.title}</h1>
             </Link>
           </div>
+
           <div className="post-details">
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
