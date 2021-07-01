@@ -7,7 +7,7 @@ function Comments({ comment }) {
   const [upvoted, setUpvoted] = useState(0);
   const [downvoted, setDownvoted] = useState(0);
 
-  const upVotingCommentClass = document.querySelector(".upvote-comment");
+  const upVotingCommentClass = document.querySelector(".upvotse-comment");
   const downVotingCommentClass = document.querySelector(".downvote-comment");
   let votes = upvoted - downvoted;
 

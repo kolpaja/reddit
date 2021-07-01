@@ -39,7 +39,6 @@ function Home() {
   if (loading) {
     return <Spinner />;
   }
-
   return (
     <div>
       <Header handleChange={handleChange} />
