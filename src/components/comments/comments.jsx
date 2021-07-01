@@ -26,7 +26,9 @@ function Comments({ comment }) {
     } else if (comment.isUpVoted === false) {
       comment.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingCommentClass.classList.add("upvoted-comment");
+      if (upVotingCommentClass) {
+        upVotingCommentClass.classList.add("upvoted-comment");
+      }
     }
   };
 
@@ -45,7 +47,9 @@ function Comments({ comment }) {
     } else {
       comment.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      downVotingCommentClass.classList.add("downvoted-comment");
+      if (downVotingCommentClass) {
+        downVotingCommentClass.classList.add("downvoted-comment");
+      }
     }
   };
   useEffect(() => {
