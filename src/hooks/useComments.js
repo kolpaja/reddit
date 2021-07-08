@@ -11,8 +11,8 @@ export default function useComments(subredditId, id) {
             .then((res) => {
                 setComments(res.data);
             })
-            // eslint-disable-next-line
             .catch((error) => console.log(error));
+        // eslint-disable-next-line
     }, []);
     return { comments }
 }

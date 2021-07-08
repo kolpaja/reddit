@@ -13,6 +13,7 @@ export default function usePosts(subredditId) {
             })
             // eslint-disable-next-line
             .catch((error) => console.log(error));
+        // eslint-disable-next-line
     }, []);
 
     return { posts }

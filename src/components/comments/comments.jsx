@@ -17,12 +17,16 @@ function Comments({ comment }) {
       setDownvoted(downvoted - 1);
       comment.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingCommentClass.classList.add("upvoted-comment");
+      if (upVotingCommentClass) {
+        upVotingCommentClass.classList.add("upvoted-comment");
+      }
       downVotingCommentClass.classList.remove("downvoted-comment");
     } else if (comment.isUpVoted === true) {
       comment.isUpVoted = false;
       setUpvoted(upvoted - 1);
-      upVotingCommentClass.classList.remove("upvoted-comment");
+      if (upVotingCommentClass) {
+        upVotingCommentClass.classList.remove("upvoted-comment");
+      }
     } else if (comment.isUpVoted === false) {
       comment.isUpVoted = true;
       setUpvoted(upvoted + 1);
@@ -38,7 +42,9 @@ function Comments({ comment }) {
       setUpvoted(upvoted - 1);
       comment.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      upVotingCommentClass.classList.remove("upvoted-comment");
+      if (upVotingCommentClass) {
+        upVotingCommentClass.classList.remove("upvoted-comment");
+      }
       downVotingCommentClass.classList.add("downvoted-comment");
     } else if (comment.isDownVoted === true) {
       comment.isDownVoted = false;
