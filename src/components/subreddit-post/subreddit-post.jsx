@@ -54,15 +54,17 @@ function SubredditPost({ location }) {
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
+      if(downVotingPostClass){
       downVotingPostClass.classList.add("post-downvoted");
+      }
     }
   };
-  useEffect(() => {}, []);
+
 
   return (
     <div key={post.id} className="subreddit-post">
       <div className="post-wrap">
-        <div className="post-vote">
+        <div className={`post-vote ${post.isUpVoted ? "voted" : ""} ${post.isDownVoted ? "voted" : ""}`}>
           <i className="fas fa-arrow-up upvote" onClick={upVotePost}></i>
           <span className="number-votes">{votes}</span>
           <i className="fas fa-arrow-down downvote" onClick={downVotePost}></i>

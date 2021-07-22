@@ -4,6 +4,7 @@ import "./posts-preview.scss";
 import { PostedTime } from "../../utilities/functions";
 import { Link } from "react-router-dom";
 import useComments from "../../hooks/useComments";
+import moment from "moment";
 
 function PostsPreview({ post, handle }) {
   const { comments } = useComments(post.subredditId, post.id);
@@ -13,6 +14,8 @@ function PostsPreview({ post, handle }) {
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);
   let votes = upvoted - downvoted;
+
+  const createdDate = moment(post.createdAt).format("MMMM Do YYYY, h:mm A");
 
   const upVote = () => {
     if (post.isDownVoted === true) {
@@ -86,6 +89,7 @@ function PostsPreview({ post, handle }) {
           <div className="post-details">
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
+              <span> ~ {PostedTime(post.createdAt)}</span>
             </p>
             <img src={post.image} alt="" />
           </div>
@@ -94,7 +98,7 @@ function PostsPreview({ post, handle }) {
               <span className="number-comments">{comments.length}</span> comment
               {comments.length > 1 ? "s" : ""}
             </span>
-            <span>posted {PostedTime(post.createdAt)}</span>
+            <span>{createdDate}</span>
           </div>
         </div>
       </div>
