@@ -38,7 +38,7 @@ function Comments({ comment }) {
       setDownvoted(downvoted + 1);
     }
   };
-console.log("upvoted-comment: ", comment.isUpVoted)
+
   return (
     <div className="comment-preview">
       <div className="comment-wrap">

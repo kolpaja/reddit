@@ -8,8 +8,6 @@ import moment from "moment";
 
 function PostsPreview({ post, handle }) {
   const { comments } = useComments(post.subredditId, post.id);
-  const upVotingClass = document.querySelector(`.postup${post.id}`);
-  const downVotingClass = document.querySelector(`.postdown${post.id}`);
 
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);
@@ -23,17 +21,14 @@ function PostsPreview({ post, handle }) {
       setDownvoted(downvoted - 1);
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingClass.classList.add("upvoted");
-      downVotingClass.classList.remove("downvoted");
     } else if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
-      upVotingClass.classList.remove("upvoted");
+   
     } else if (post.isUpVoted === false) {
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingClass.classList.add("upvoted");
-      downVotingClass.classList.remove("downvoted");
+
     }
   };
 
@@ -43,20 +38,15 @@ function PostsPreview({ post, handle }) {
       setUpvoted(upvoted - 1);
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      upVotingClass.classList.remove("upvoted");
-      downVotingClass.classList.add("downvoted");
+
     } else if (post.isDownVoted === true) {
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
-      downVotingClass.classList.remove("downvoted");
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      downVotingClass.classList.add("downvoted");
     }
   };
-
-  useEffect(() => {}, []);
 
   const unVotePost = { ...post, isUpVoted: false, isDownVoted: false };
 
@@ -65,12 +55,12 @@ function PostsPreview({ post, handle }) {
       <div className="post-wrap">
         <div className="post-vote">
           <i
-            className={`fas fa-arrow-up upvote postup${post.id}`}
+            className={`fas fa-arrow-up upvote ${post.isUpVoted ? "upvoted-post" : ""}`}
             onClick={upVote}
           ></i>
           <span className="number-votes">{votes}</span>
           <i
-            className={`fas fa-arrow-down downvote postdown${post.id}`}
+            className={`fas fa-arrow-down downvote ${post.isDownVoted ? "downvoted-post" : ""}`}
             onClick={downVote}
           ></i>
         </div>

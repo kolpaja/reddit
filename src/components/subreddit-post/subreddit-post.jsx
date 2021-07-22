@@ -13,12 +13,13 @@ function SubredditPost({ location }) {
     isUpVoted: false,
     isDownVoted: false,
   }));
-  const upVotingPostClass = document.querySelector(".fa-arrow-up");
-  const downVotingPostClass = document.querySelector(".fa-arrow-down");
 
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);
   let votes = upvoted - downvoted;
+
+console.log("post.isDownVoted: ",post.isDownVoted);
+console.log("post.isUpVoted: ", post.isUpVoted)
 
   const upVotePost = () => {
     if (post.isDownVoted === true) {
@@ -26,17 +27,12 @@ function SubredditPost({ location }) {
       setDownvoted(downvoted - 1);
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingPostClass.classList.add("post-upvoted");
-      downVotingPostClass.classList.remove("post-downvoted");
     } else if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
-      upVotingPostClass.classList.remove("post-upvoted");
     } else if (post.isUpVoted === false) {
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingPostClass.classList.add("post-upvoted");
-      downVotingPostClass.classList.remove("post-downvoted");
     }
   };
   const downVotePost = () => {
@@ -45,18 +41,12 @@ function SubredditPost({ location }) {
       setUpvoted(upvoted - 1);
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      upVotingPostClass.classList.remove("post-upvoted");
-      downVotingPostClass.classList.add("post-downvoted");
     } else if (post.isDownVoted === true) {
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
-      downVotingPostClass.classList.remove("post-downvoted");
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      if(downVotingPostClass){
-      downVotingPostClass.classList.add("post-downvoted");
-      }
     }
   };
 
@@ -64,10 +54,10 @@ function SubredditPost({ location }) {
   return (
     <div key={post.id} className="subreddit-post">
       <div className="post-wrap">
-        <div className={`post-vote ${post.isUpVoted ? "voted" : ""} ${post.isDownVoted ? "voted" : ""}`}>
-          <i className="fas fa-arrow-up upvote" onClick={upVotePost}></i>
+        <div className="post-vote" >
+          <i className={`fas fa-arrow-up upvote ${post.isUpVoted ? "post-upvoted" : ""}`} onClick={upVotePost}></i>
           <span className="number-votes">{votes}</span>
-          <i className="fas fa-arrow-down downvote" onClick={downVotePost}></i>
+          <i className={`fas fa-arrow-down downvote ${post.isDownVoted ? "post-downvoted" : ""}`} onClick={downVotePost}></i>
         </div>
         <div className="post-body">
           <div className="post-title">{post.title}</div>
