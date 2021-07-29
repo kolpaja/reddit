@@ -58,9 +58,7 @@ function Comments({ comment }) {
       }
     }
   };
-  useEffect(() => {
-    console.log("useeffect");
-  }, []);
+
   return (
     <div className="comment-preview">
       <div className="comment-wrap">

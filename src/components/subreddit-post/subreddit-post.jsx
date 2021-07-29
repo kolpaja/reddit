@@ -25,6 +25,9 @@ function SubredditPost(props) {
     } else if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
+    } else if (post.isUpVoted === false) {
+      setUpvoted(upvoted + 1);
+      post.isUpVoted = true;
     }
   };
   const downVotePost = () => {
@@ -51,10 +54,17 @@ function SubredditPost(props) {
         </span>
         <div className="post-wrap">
           <div className="post-vote">
-            <i className="fas fa-arrow-up upvote" onClick={upVotePost}></i>
+            <i
+              className={`fas fa-arrow-up upvote ${
+                post.isUpVoted ? "post-upvoted" : ""
+              }`}
+              onClick={upVotePost}
+            ></i>
             <span className="number-votes">{votes}</span>
             <i
-              className="fas fa-arrow-down downvote"
+              className={`fas fa-arrow-down downvote ${
+                post.isDownVoted ? "post-downvoted" : ""
+              }`}
               onClick={downVotePost}
             ></i>
           </div>

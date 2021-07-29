@@ -18,17 +18,12 @@ function PostsPreview({ post, handle }) {
       setDownvoted(downvoted - 1);
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingClass.classList.add("upvoted");
-      downVotingClass.classList.remove("downvoted");
     } else if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
-      upVotingClass.classList.remove("upvoted");
     } else if (post.isUpVoted === false) {
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingClass.classList.add("upvoted");
-      downVotingClass.classList.remove("downvoted");
     }
   };
 
@@ -38,16 +33,12 @@ function PostsPreview({ post, handle }) {
       setUpvoted(upvoted - 1);
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      upVotingClass.classList.remove("upvoted");
-      downVotingClass.classList.add("downvoted");
     } else if (post.isDownVoted === true) {
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
-      downVotingClass.classList.remove("downvoted");
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      downVotingClass.classList.add("downvoted");
     }
   };
 
@@ -68,18 +59,24 @@ function PostsPreview({ post, handle }) {
       <div className="post-wrap">
         <div className="post-vote">
           <i
-            className={`fas fa-arrow-up upvote postup${post.id}`}
+            className={`fas fa-arrow-up upvote ${
+              post.isUpVoted ? "upvoted-post" : ""
+            }`}
             onClick={upVote}
           ></i>
           <span className="number-votes">{votes}</span>
           <i
-            className={`fas fa-arrow-down downvote postdown${post.id}`}
+            className={`fas fa-arrow-down downvote ${
+              post.isDownVoted ? "downvoted-post" : ""
+            }`}
             onClick={downVote}
           ></i>
         </div>
         <div className="post-body">
           <div className="post-title">
-            <h1 key={post.id}>{post.title}</h1>
+            <h1 onClick={modalHandler} key={post.id}>
+              {post.title}
+            </h1>
           </div>
           {openModal && (
             <SubredditPost
@@ -89,7 +86,7 @@ function PostsPreview({ post, handle }) {
               onClose={onClose}
             />
           )}
-          <button onClick={modalHandler}>Open MOdal</button>
+
           <div className="post-details">
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
