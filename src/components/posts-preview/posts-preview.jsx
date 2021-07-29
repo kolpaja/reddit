@@ -12,6 +12,8 @@ function PostsPreview({ post, handle }) {
   const [downvoted, setDownvoted] = useState(post.downvotes);
   let votes = upvoted - downvoted;
 
+  const createdDate = moment(post.createdAt).format("MMMM Do YYYY, h:mm A");
+
   const upVote = () => {
     if (post.isDownVoted === true) {
       post.isDownVoted = false;
@@ -41,8 +43,6 @@ function PostsPreview({ post, handle }) {
       setDownvoted(downvoted + 1);
     }
   };
-
-  useEffect(() => {}, []);
 
   const unVotePost = { ...post, isUpVoted: false, isDownVoted: false };
 
@@ -90,6 +90,7 @@ function PostsPreview({ post, handle }) {
           <div className="post-details">
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
+              <span> ~ {PostedTime(post.createdAt)}</span>
             </p>
             <img src={post.image} alt="" />
           </div>
@@ -98,7 +99,7 @@ function PostsPreview({ post, handle }) {
               <span className="number-comments">{comments.length}</span> comment
               {comments.length > 1 ? "s" : ""}
             </span>
-            <span>posted {PostedTime(post.createdAt)}</span>
+            <span>{createdDate}</span>
           </div>
         </div>
       </div>

@@ -16,6 +16,9 @@ function SubredditPost(props) {
   const [downvoted, setDownvoted] = useState(post.downvotes);
   let votes = upvoted - downvoted;
 
+  console.log("post.isDownVoted: ", post.isDownVoted);
+  console.log("post.isUpVoted: ", post.isUpVoted);
+
   const upVotePost = () => {
     if (post.isDownVoted === true) {
       post.isDownVoted = false;

@@ -17,13 +17,19 @@ function Posts({ location }) {
   console.log("🚀 posts: ", posts);
   const [sortType, setSortType] = useState();
 
-  const dateDesc = () =>
-    posts.sort((a, b) => new moment(a.createdAt) - new moment(b.createdAt));
+  const dateDesc = () => {
+    posts.sort(
+      (a, b) => new moment(a.createdAt) - new moment(b.createdAt)
+    );
+  };
 
-  const dateAsc = () =>
-    posts.sort((a, b) => new moment(b.createdAt) - new moment(a.createdAt));
+  const dateAsc = () => {
+    posts.sort(
+      (a, b) => new moment(b.createdAt) - new moment(a.createdAt)
+    );
+  };
 
-  const titleAsc = () =>
+  const titleAsc = () => {
     posts.sort(function (a, b) {
       return a.title > b.title.toUpperCase()
         ? -1
@@ -31,8 +37,9 @@ function Posts({ location }) {
         ? 1
         : 0;
     });
+  };
 
-  const titleDesc = () =>
+  const titleDesc = () => {
     posts.sort(function (a, b) {
       return a.title.toUpperCase() > b.title.toUpperCase()
         ? 1
@@ -40,6 +47,7 @@ function Posts({ location }) {
         ? -1
         : 0;
     });
+  };
 
   useEffect(() => {
     switch (sortType) {

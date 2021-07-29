@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./comments.styles.scss";
 
 import { PostedTime } from "../../utilities/functions";
@@ -59,7 +59,7 @@ function Comments({ comment }) {
         <div className="comment-body">
           <div className="comment-user">
             <div>
-              <i className="fas fa-user"></i>
+              <i className="fas fa-user "></i>
               <span>{comment.name}</span>
             </div>
             <span>{PostedTime(comment.createdAt)}</span>
