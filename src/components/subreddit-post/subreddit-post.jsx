@@ -43,32 +43,41 @@ function SubredditPost(props) {
   };
 
   return (
-    <div key={post.id} className="subreddit-post">
-      <div className="post-wrap">
-        <div className="post-vote">
-          <i className="fas fa-arrow-up upvote" onClick={upVotePost}></i>
-          <span className="number-votes">{votes}</span>
-          <i className="fas fa-arrow-down downvote" onClick={downVotePost}></i>
+    <React.Fragment>
+      <div className="modal__backdrop" onClick={props.onClose} />
+      <div key={post.id} className="subreddit-post">
+        <span className="close" onClick={props.onClose}>
+          <i className="fas fa-times"></i> Close
+        </span>
+        <div className="post-wrap">
+          <div className="post-vote">
+            <i className="fas fa-arrow-up upvote" onClick={upVotePost}></i>
+            <span className="number-votes">{votes}</span>
+            <i
+              className="fas fa-arrow-down downvote"
+              onClick={downVotePost}
+            ></i>
+          </div>
+          <div className="post-body">
+            <div className="post-title">{post.title}</div>
+            <div className="post-details">
+              <p>
+                "{post.body}" - <span className="post-user">{post.user}</span>
+              </p>
+              <img src={post.image} alt="" />
+            </div>
+            <div className="post-footer">
+              <span>posted {PostedTime(post.createdAt)}</span>
+            </div>
+          </div>
         </div>
-        <div className="post-body">
-          <div className="post-title">{post.title}</div>
-          <div className="post-details">
-            <p>
-              "{post.body}" - <span className="post-user">{post.user}</span>
-            </p>
-            <img src={post.image} alt="" />
-          </div>
-          <div className="post-footer">
-            <span>posted {PostedTime(post.createdAt)}</span>
-          </div>
+        <div className="post-comments">
+          {mappedComments.map((comment) => (
+            <Comments comment={comment} key={comment.id} />
+          ))}
         </div>
       </div>
-      <div className="post-comments">
-        {mappedComments.map((comment) => (
-          <Comments comment={comment} key={comment.id} />
-        ))}
-      </div>
-    </div>
+    </React.Fragment>
   );
 }
 

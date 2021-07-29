@@ -2,15 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./posts-preview.scss";
 
 import { PostedTime } from "../../utilities/functions";
-import { Link } from "react-router-dom";
 import useComments from "../../hooks/useComments";
-import Modal from "../Modal/Modal";
 import SubredditPost from "../subreddit-post/subreddit-post";
 
 function PostsPreview({ post, handle }) {
   const { comments } = useComments(post.subredditId, post.id);
-  const upVotingClass = document.querySelector(`.postup${post.id}`);
-  const downVotingClass = document.querySelector(`.postdown${post.id}`);
 
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);

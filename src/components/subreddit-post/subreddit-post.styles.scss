@@ -1,9 +1,30 @@
 .subreddit-post{
         display: flex;
+        position: fixed;
+        justify-content: center;
         flex-direction: column;
+        align-items: center;
         margin-bottom: 30px;
         border-radius: 10px;
         margin-top: 30px;
+        top: 30px;
+        left: 10%;
+        width: 80%;
+        z-index: 100;
+        overflow: hidden;
+        background-color: white;
+       
+      
+
+      .close{
+          margin-top: 10px;
+          font-weight: 700;
+      }
+      .close:hover{
+          color: rgb(126, 123, 123);
+          text-decoration: underline;
+          cursor: pointer;
+      }
         
         .post-wrap{
             display: flex;
@@ -107,3 +128,12 @@
          
         }
     
+.modal__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.75);
+  }
