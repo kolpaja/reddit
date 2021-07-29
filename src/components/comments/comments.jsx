@@ -24,6 +24,7 @@ function Comments({ comment }) {
   };
 
   const downVoteComment = () => {
+    // eslint-disable-next-line
     if (comment.isUpVoted === true) {
       comment.isUpVoted = false;
       setUpvoted(upvoted - 1);

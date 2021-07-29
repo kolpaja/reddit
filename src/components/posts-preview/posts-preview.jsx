@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./posts-preview.scss";
+import moment from "moment";
 
 import { PostedTime } from "../../utilities/functions";
 import useComments from "../../hooks/useComments";

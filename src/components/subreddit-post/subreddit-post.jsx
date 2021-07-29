@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./subreddit-post.styles.scss";
 
 import Comments from "../comments/comments";

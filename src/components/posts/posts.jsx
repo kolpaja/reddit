@@ -18,15 +18,11 @@ function Posts({ location }) {
   const [sortType, setSortType] = useState();
 
   const dateDesc = () => {
-    posts.sort(
-      (a, b) => new moment(a.createdAt) - new moment(b.createdAt)
-    );
+    posts.sort((a, b) => new moment(a.createdAt) - new moment(b.createdAt));
   };
 
   const dateAsc = () => {
-    posts.sort(
-      (a, b) => new moment(b.createdAt) - new moment(a.createdAt)
-    );
+    posts.sort((a, b) => new moment(b.createdAt) - new moment(a.createdAt));
   };
 
   const titleAsc = () => {
@@ -48,7 +44,7 @@ function Posts({ location }) {
         : 0;
     });
   };
-
+  // eslint-disable-next-line
   useEffect(() => {
     switch (sortType) {
       case "dateAsc":
@@ -62,6 +58,7 @@ function Posts({ location }) {
       default:
         break;
     }
+    // eslint-disable-next-line
   }, [sortType]);
 
   const mappedPosts = posts.map((post) => ({
