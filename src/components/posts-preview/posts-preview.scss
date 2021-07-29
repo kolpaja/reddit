@@ -3,6 +3,7 @@
     background-color: #fff;
     margin-bottom: 30px;
     border-radius: 10px;
+
     .post-title:hover{
         cursor: pointer;
         color: rgb(92, 90, 90);
@@ -104,5 +105,26 @@
     }
 }
 
+@media (max-width: 1250px) {
+    .posts-preview{
+        width: 100%;
+    }
+}
+@media (max-width: 375px) {
+    .posts-preview{
+       width: 100%;
+       font-size: 12px;
+    }
+    .posts-preview .post-wrap .post-body .post-details img{
+        width: 200px;
+    }
+    .posts-preview .post-wrap .post-body h1{
+        font-size: 15px;
+        margin-left: 5px;
+    }
+    .posts-preview .post-wrap .post-vote .number-votes{
+        font-size: 12px;
+    }
+}
 
  

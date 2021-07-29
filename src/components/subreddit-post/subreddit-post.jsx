@@ -46,7 +46,7 @@ function SubredditPost(props) {
   };
 
   return (
-    <React.Fragment>
+    <div className="Modal">
       <div className="modal__backdrop" onClick={props.onClose} />
       <div key={post.id} className="subreddit-post">
         <span className="close" onClick={props.onClose}>
@@ -87,7 +87,7 @@ function SubredditPost(props) {
           ))}
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

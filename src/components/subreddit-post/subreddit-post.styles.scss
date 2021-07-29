@@ -1,20 +1,21 @@
+.Modal{
+    height: 100vh;
+    overflow-wrap: inherit;
+    
+}
 .subreddit-post{
         display: flex;
         position: fixed;
-        justify-content: center;
+        height: 100%;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 30px;
-        border-radius: 10px;
-        margin-top: 30px;
-        top: 30px;
-        left: 10%;
-        width: 80%;
+        margin: 0 auto;
+        top: 40px;
+        left: auto;
         z-index: 100;
-        overflow: hidden;
+        overflow: scroll;
         background-color: white;
-       
-      
+        background-attachment: scroll;
 
       .close{
           margin-top: 10px;
@@ -28,12 +29,11 @@
         
         .post-wrap{
             display: flex;
-            position: relative;
-            border: 1px solid rgb(199, 193, 193);
-            margin: 30px auto;
-            border-radius: 10px;
-            padding: 20px;
+            margin: 20px auto;        
+            padding: 10px;
             background-color: #fff;
+            border-top: 1px solid rgb(105, 102, 102);
+            border-bottom: 1px solid rgb(105, 102, 102);
        
 
             .post-vote{
@@ -136,4 +136,35 @@
     height: 100vh;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.75);
+  }
+
+  @media (max-width: 768px) {
+    .subreddit-post .post-wrap .post-body .post-details img{
+        width: 300px;
+    }
+    .comment-preview .comment-wrap .comment-body{
+        width: 300px;
+        margin: 10px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .Modal{
+        width: 300px;
+        margin: 0 auto;
+    }
+    .subreddit-post{
+        width: 250px;
+        left: 15%;
+        font-size: 12px;
+    }
+    .subreddit-post .post-wrap .post-body .post-details img{
+        width: 190px;
+    }
+    .subreddit-post .post-wrap .post-body .post-title{
+        font-size: 15px;
+    }
+    .post-comments{
+        min-width: 200px;
+    }
   }
