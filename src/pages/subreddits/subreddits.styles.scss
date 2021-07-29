@@ -25,7 +25,7 @@
            padding: 10px;
         
         }
-
+       
         &.subreddit-wrap{
           
             .subreddit-item{
@@ -39,6 +39,7 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+               cursor: pointer;
                
                 a{
                     text-decoration: none;
@@ -51,6 +52,8 @@
                     color: #797878;
                     line-height: 1.4;
                 }
+
+               
             }
         }
    }

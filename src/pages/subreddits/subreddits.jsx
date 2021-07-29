@@ -20,8 +20,8 @@ function Subreddits({ subreddits }) {
                   className="item"
                 >
                   <h5>{subreddit.handle.toUpperCase()}</h5>
+                  <p>This is the official subreddit for {subreddit.handle}</p>
                 </Link>
-                <p>This is the official subreddit for {subreddit.handle}</p>
               </div>
             </div>
           );

@@ -4,17 +4,13 @@ import "./subreddit-post.styles.scss";
 import Comments from "../comments/comments";
 import { PostedTime } from "../../utilities/functions";
 
-function SubredditPost({ location }) {
-  const { comments } = location.state;
-  const post = location.state.unVotePost;
-
-  const mappedComments = comments.map((comment) => ({
+function SubredditPost(props) {
+  const post = props.unVotePost;
+  const mappedComments = props.comments.map((comment) => ({
     ...comment,
     isUpVoted: false,
     isDownVoted: false,
   }));
-  const upVotingPostClass = document.querySelector(".fa-arrow-up");
-  const downVotingPostClass = document.querySelector(".fa-arrow-down");
 
   const [upvoted, setUpvoted] = useState(post.upvotes);
   const [downvoted, setDownvoted] = useState(post.downvotes);
@@ -26,17 +22,9 @@ function SubredditPost({ location }) {
       setDownvoted(downvoted - 1);
       post.isUpVoted = true;
       setUpvoted(upvoted + 1);
-      upVotingPostClass.classList.add("post-upvoted");
-      downVotingPostClass.classList.remove("post-downvoted");
     } else if (post.isUpVoted === true) {
       post.isUpVoted = false;
       setUpvoted(upvoted - 1);
-      upVotingPostClass.classList.remove("post-upvoted");
-    } else if (post.isUpVoted === false) {
-      post.isUpVoted = true;
-      setUpvoted(upvoted + 1);
-      upVotingPostClass.classList.add("post-upvoted");
-      downVotingPostClass.classList.remove("post-downvoted");
     }
   };
   const downVotePost = () => {
@@ -45,19 +33,14 @@ function SubredditPost({ location }) {
       setUpvoted(upvoted - 1);
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      upVotingPostClass.classList.remove("post-upvoted");
-      downVotingPostClass.classList.add("post-downvoted");
     } else if (post.isDownVoted === true) {
       post.isDownVoted = false;
       setDownvoted(downvoted - 1);
-      downVotingPostClass.classList.remove("post-downvoted");
     } else {
       post.isDownVoted = true;
       setDownvoted(downvoted + 1);
-      downVotingPostClass.classList.add("post-downvoted");
     }
   };
-  useEffect(() => {}, []);
 
   return (
     <div key={post.id} className="subreddit-post">

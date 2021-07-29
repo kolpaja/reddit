@@ -4,6 +4,8 @@ import "./posts-preview.scss";
 import { PostedTime } from "../../utilities/functions";
 import { Link } from "react-router-dom";
 import useComments from "../../hooks/useComments";
+import Modal from "../Modal/Modal";
+import SubredditPost from "../subreddit-post/subreddit-post";
 
 function PostsPreview({ post, handle }) {
   const { comments } = useComments(post.subredditId, post.id);
@@ -57,6 +59,14 @@ function PostsPreview({ post, handle }) {
 
   const unVotePost = { ...post, isUpVoted: false, isDownVoted: false };
 
+  const [openModal, setOpenModal] = useState(false);
+  const onClose = () => {
+    setOpenModal(false);
+  };
+  const modalHandler = () => {
+    setOpenModal(true);
+  };
+
   return (
     <div key={post.id} className="posts-preview">
       <div className="post-wrap">
@@ -73,16 +83,17 @@ function PostsPreview({ post, handle }) {
         </div>
         <div className="post-body">
           <div className="post-title">
-            <Link
-              to={{
-                pathname: `/r/${handle}/${post.subredditId}/posts/${post.id}/`,
-                state: { handle, unVotePost, comments },
-              }}
-            >
-              <h1 key={post.id}>{post.title}</h1>
-            </Link>
+            <h1 key={post.id}>{post.title}</h1>
           </div>
-
+          {openModal && (
+            <SubredditPost
+              handle={handle}
+              unVotePost={unVotePost}
+              comments={comments}
+              onClose={onClose}
+            />
+          )}
+          <button onClick={modalHandler}>Open MOdal</button>
           <div className="post-details">
             <p>
               "{post.body}" - <span className="post-user">{post.user}</span>
