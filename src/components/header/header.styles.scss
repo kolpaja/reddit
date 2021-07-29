@@ -52,3 +52,8 @@
     }
 }
 
+@media (max-width: 375px) {
+    .header .header_nav_left .header_search .search{
+        width: 100px;
+    }
+}
